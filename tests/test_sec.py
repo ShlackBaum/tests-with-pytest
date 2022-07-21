@@ -3,7 +3,7 @@ from unittest.mock import patch
 import unittest
 from shelf_document_tests_homework import \
     check_document_existance, get_doc_owner_name, get_doc_shelf, remove_doc_from_shelf, \
-    delete_doc, add_new_shelf, append_doc_to_shelf
+    delete_doc, add_new_shelf, append_doc_to_shelf, get_all_doc_owners_names
 
 
 FIXTURE = [("11-2", True), ("11-3", False)]
@@ -54,13 +54,19 @@ def test_add_new_shelf():
 def test_add_new_shelf2():
     assert add_new_shelf()[1] == False
 
-FIXTURE4 = [("111","1", ('1', False)), ("222","4", ('4', False)),
+FIXTURE4 = [("111","1", ('1', False)), ("222","4", ('4', True)),
             ("11-2", "1", ('1', False)), ("11-2", "6", ('6', True)),
             ("11-2", "5", ('5', True))
             ]
+
 @pytest.mark.parametrize("doc_number, shelf_number, result", FIXTURE4)
 def test_append_doc_to_shelf(doc_number, shelf_number, result):
     assert append_doc_to_shelf(doc_number, shelf_number) == result
+
+def test_get_all_doc_owners_names():
+    assert get_all_doc_owners_names() == ['Василий Гупкин', 'Геннадий Покемонов', 'Аристарх Павлов']
+
+
 
 
 
